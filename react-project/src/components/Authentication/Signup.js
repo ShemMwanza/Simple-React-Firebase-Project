@@ -58,8 +58,8 @@ export default function Signup() {
             <EmptyNavbar to='/signin' text='Go to Sign In' />
             <div className="flex rounded-lg justify-center px-6 py-2">
                 <div className="w-full rounded-lg xl:w-3/4 lg:w-11/12 flex">
-                    <div className="hidden md:block w-1/2 rounded-lg bg-blue-500 py-10 px-10">
-                        <img src="/assets/authAsset.png" alt='link' />
+                    <div className="hidden md:block w-1/2 rounded-lg bg-green-primary py-10 px-10">
+                        <img src="/assets/authAsset.svg" className='h-full' alt='link' />
                     </div>
                     <div className="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none">
                         <h3 className="pt-4 text-2xl text-center">Create an Account!</h3>
@@ -131,7 +131,7 @@ export default function Signup() {
                             <div className="text-center">
                                 <Link
                                     to='/signin'
-                                    className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
+                                    className="inline-block text-sm text-green-light align-baseline hover:text-green-primary"
                                     href="./index.html"
                                 >
                                     Already have an account? Login!

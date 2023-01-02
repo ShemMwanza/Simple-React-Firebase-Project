@@ -4,11 +4,11 @@
 
 @layer components {
     .btn-primary {
-        @apply w-full px-4 py-3 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-700 focus:outline-none;
+        @apply w-full px-4 py-3 font-bold text-white bg-green-primary rounded-md hover:bg-green-light focus:outline-none;
     }
 
     .input-primary {
-        @apply w-full px-4 py-3 mb-5 focus:ring-1 focus:ring-blue-400 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none;
+        @apply w-full px-4 py-3 mb-5 focus:ring-1 focus:ring-green-primary focus:ring-opacity-40 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none;
     }
 
     .input-error {

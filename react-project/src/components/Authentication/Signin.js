@@ -48,14 +48,14 @@ export default function Signin() {
             <EmptyNavbar to='/signup' text='Go to Sign up' />
             <div className="flex rounded-lg justify-center px-2 md:px-6 py-12">
                 <div className="w-full rounded-lg xl:w-3/4 lg:w-11/12 flex">
-                    <div className="hidden lg:flex lg:justify-center w-1/2 rounded-lg bg-blue-500 py-10 px-10">
-                        <img src="/assets/authAsset.png" alt='link' />
+                    <div className="hidden lg:flex lg:justify-center w-1/2 rounded-lg bg-green-primary py-10 px-10">
+                        <img src="/assets/authAsset.svg" alt='link' />
                     </div>
                     <div className="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none">
                         <h3 className="pt-4 text-2xl text-center">Login</h3>
                         <form
                             onSubmit={handleSubmit}
-                            className="px-8 pt-6 pb-8 mb-4 bg-white rounded">
+                            className="px-8 pt-4 pb-8 mb-4 bg-white rounded">
 
                             <div className="mb-2">
                                 <TextInput
@@ -85,7 +85,7 @@ export default function Signin() {
                             </div>
                             <div className="text-right">
                                 <Link
-                                    className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
+                                    className="inline-block text-sm text-green-light align-baseline hover:text-green-primary"
                                     to="/forgotpassword"
                                 >
                                     Forgot Password?
@@ -107,7 +107,7 @@ export default function Signin() {
                             <div className="text-center">
                                 <Link
                                     to='/signup'
-                                    className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
+                                    className="inline-block text-sm text-green-light align-baseline hover:text-green-primary"
                                     href="./index.html">
                                     Don't have an account? Sign up!
                                 </Link>
