@@ -54,13 +54,13 @@ const logInWithEmailAndPassword = async (email, password) => {
 
 };
 
-const createWithEmailAndPassword = async (name, email, password) => {
+const createWithEmailAndPassword = async (displayName, email, password) => {
 
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
     await addDoc(collection(db, "users"), {
         uid: user.uid,
-        name,
+        displayName,
         authProvider: "local",
         email,
     });

@@ -23,13 +23,13 @@ export default function Signup() {
         const c_password = e.target.cpassword.value;
         const fname = e.target.fname.value;
         const lname = e.target.lname.value;
-        const full_name = fname + ' ' + lname;
+        const displayName = fname + ' ' + lname;
         if (password !== c_password) {
             setErrorMessage('Passwords Do Not Match!');
         }
         else{
         setIsLoading(true);
-        createWithEmailAndPassword(full_name, email, password).then(() => {
+            createWithEmailAndPassword(displayName, email, password).then(() => {
             setIsLoading(false);
         }).catch((error) => {
             console.log(error.code)

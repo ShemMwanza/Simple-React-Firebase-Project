@@ -20,32 +20,32 @@ export default function Navbar() {
                     <button
                         onClick={showuserMenu}
                         type="button"
-                        className="flex mr-3 text-sm bg-gray-800 rounded-full focus:ring-gray-600">
+                        className="flex mr-3 text-sm bg-white rounded-full focus:ring-gray-600">
                         <span className="sr-only">Open user menu</span>
                         <img className="w-10 h-10 rounded-full" src="https://www.svgrepo.com/show/294228/password-forgot.svg" alt="Reset" />
                     </button>
                     <MenuButton />
                     {/* dropdown */}
-                    <div className={userMenu ? "z-50 my-4 mt-14 absolute text-base list-none divide-y rounded shadow bg-gray-700 divide-gray-600"
+                    <div className={userMenu ? "z-50 my-4 mt-14 absolute border border-green-primary border-opacity-20 text-base list-none divide-y rounded  bg-white shadow-lg divide-gray-800"
                         :
-                        "z-50 hidden my-4 text-base list-none rounded shadow bg-gray-700 divide-gray-600"}
+                        "hidden"}
                     >
                         <div className="px-4 py-3">
-                            <span className="block text-sm text-gray-900 dark:text-white">{user.displayName}</span>
-                            <span className="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{user.email}</span>
+                            <span className="block text-sm text-gray-700">{user.displayName}</span>
+                            <span className="block text-sm font-medium text-gray-700 truncate">{user.email}</span>
                         </div>
-                        <ul className="py-1" aria-labelledby="user-menu-button">
+                        <ul className="py-1">
                             <li>
-                                <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</Link>
+                                <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:text-white hover:bg-green-primary">Profile</Link>
                             </li>
                             <li>
-                                <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</Link>
+                                <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:text-white hover:bg-green-primary">Settings</Link>
                             </li>
                             <li>
-                                <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</Link>
+                                <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:text-white hover:bg-green-primary">Earnings</Link>
                             </li>
                             <li>
-                                <button onClick={logout} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</button>
+                                <button onClick={logout} className="w-full  text-start block px-4 py-2 text-sm text-gray-700 hover:text-white hover:bg-green-primary">Sign out</button>
                             </li>
                         </ul>
                     </div>
@@ -68,7 +68,7 @@ export default function Navbar() {
             <button data-collapse-toggle="navbar-cta"
                 type="button"
                 onClick={showMenu}
-                className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-cta" aria-expanded="false">
+                className="inline-flex items-center p-2 text-sm  rounded-lg md:hidden hover:text-white hover:bg-green-primary focus:outline-none focus:ring-2 focus:ring-gray-200 text-gray-400" aria-expanded="false">
                 <span className="sr-only">Open main menu</span>
                 <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd">
