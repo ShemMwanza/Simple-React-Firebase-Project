@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import NavHeader from './NavHeader'
 import { Link } from 'react-router-dom';
 import NavLinks from './NavLinks'
-import { auth, logout } from "../../Authentication/firebaseConfig";
+import {
+    getDocs,
+    collection,
+} from "firebase/firestore";
+import { auth, logout, db } from "../../Authentication/firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
 export default function Navbar() {
     const [menu, setMenu] = useState(false);
@@ -12,6 +16,45 @@ export default function Navbar() {
     const showuserMenu = () => setuserMenu(!userMenu)
 
     const [user] = useAuthState(auth);
+    
+    //Fetch Data
+    const [fetch, setFetch] = useState([]);
+ 
+    const FetchData = () => {
+       
+        getDocs(collection(db, "users"))
+            .then((querySnapshot)=>{              
+                const newdata = querySnapshot.docs
+                    .map((doc) => ({...doc.data(), id:doc.id }));
+                setFetch(newdata);
+            })
+       
+    }
+   
+    useEffect(()=>{
+        FetchData();
+    }, [])
+
+    const ref = useRef();
+    
+    useEffect(() => {
+        const checkClick = e => {
+            // Menu will be closed
+            if (userMenu  && ref.current && !ref.current.contains(e.target)) {
+                setMenu(false);
+                setuserMenu(false);
+                console.log("yesaa")
+            }
+        }
+
+        document.addEventListener("mousedown", checkClick)
+
+        return () => {
+            document.removeEventListener("mousedown", checkClick)
+            console.log("yes")
+        }
+    }, [menu, userMenu])
+
     const UserButton = () => {
 
         return (
@@ -26,12 +69,15 @@ export default function Navbar() {
                     </button>
                     <MenuButton />
                     {/* dropdown */}
-                    <div className={userMenu ? "z-50 my-4 mt-14 absolute border border-green-primary border-opacity-20 text-base list-none divide-y rounded  bg-white shadow-lg divide-gray-800"
+                    <div ref={ref} className={userMenu ? "z-50 my-4 mt-14 absolute border border-green-primary border-opacity-20 text-base list-none divide-y rounded  bg-white shadow-lg divide-gray-800"
                         :
                         "hidden"}
                     >
                         <div className="px-4 py-3">
-                            <span className="block text-sm text-gray-700">{user.displayName}</span>
+                            {
+                            fetch?.map((newdata,i) => (
+                            <span key={i} className="block text-sm text-gray-700">{newdata.name}</span>
+                            ))}
                             <span className="block text-sm font-medium text-gray-700 truncate">{user.email}</span>
                         </div>
                         <ul className="py-1">
@@ -71,7 +117,7 @@ export default function Navbar() {
                 className="inline-flex items-center p-2 text-sm  rounded-lg md:hidden hover:text-white hover:bg-green-primary focus:outline-none focus:ring-2 focus:ring-gray-200 text-gray-400" aria-expanded="false">
                 <span className="sr-only">Open main menu</span>
                 <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd">
+                    <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd">
                     </path>
                 </svg>
             </button>
@@ -92,7 +138,7 @@ export default function Navbar() {
                             )}
                     </>
                     <div className={menu ? "items-center justify-between w-full md:flex md:w-auto md:order-1" : "items-center justify-between hidden w-full md:flex md:w-auto md:order-1"} id="navbar-cta">
-                        <NavLinks />
+                        <NavLinks  />
                     </div>
                 </div>
             </nav>

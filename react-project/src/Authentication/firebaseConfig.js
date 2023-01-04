@@ -91,6 +91,20 @@ const logout = () => {
     signOut(auth);
 };
 
+// const FetchData = (id) => this.db.collection("users").doc(id).get();
+
+const FetchData = async (cl) => {
+    // const [fetch, setFetch] = useState("")
+    await getDocs(collection(db, cl))
+        .then((querySnapshot) => {
+            const data = querySnapshot.docs
+                .map((doc) => ({ ...doc.data(), id: doc.id }));
+            // setFetch(data);
+            // console.log(data);
+            return ({data}); 
+        })
+}
+
 export {
     auth,
     db,
@@ -99,4 +113,5 @@ export {
     createWithEmailAndPassword,
     sendPasswordReset,
     logout,
+    FetchData
 };
