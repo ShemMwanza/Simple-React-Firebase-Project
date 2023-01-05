@@ -13,7 +13,12 @@ module.exports = {
       },
       animation: {
         'spin-slow': 'spin 2.5s linear infinite',
-      }
+      },
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
+        adelia: ["ADELIA", "cursive"],
+        sans: ['Proxima Nova,"sans-serif']
+      },
     },
   },
   plugins: [],

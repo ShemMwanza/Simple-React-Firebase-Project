@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Error from './components/404/404';
-import ForgotPassword from './components/Authentication/ForgotPassword';
-import Signin from './components/Authentication/Signin';
-import Signup from './components/Authentication/Signup';
-import { Loading } from './components/Loading/Loading';
+import ForgotPassword from './User/Authentication/ForgotPassword';
+import Signin from './User/Authentication/Signin';
+import Signup from './User/Authentication/Signup';
+import Profile from './User/Account/Profile';
 import Home from './Home/Home';
 function App() {
   return (
@@ -15,9 +15,9 @@ function App() {
           </Route>
           <Route path="/signin" element={<Signin />}/>
           <Route path="/signup" element={<Signup />} />
-          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/forgotpassword" element={<ForgotPassword/>} />
           <Route path="/*" element={<Error />} />
-          <Route path="/uy" element={<Loading />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
 
