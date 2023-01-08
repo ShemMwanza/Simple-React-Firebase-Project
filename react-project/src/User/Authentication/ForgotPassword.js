@@ -8,7 +8,7 @@ import LoadButton from '../../components/Buttons/LoadButton';
 export default function ForgotPassword() {
 
     //Loading
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     const [errorMsg, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
@@ -71,11 +71,12 @@ export default function ForgotPassword() {
                                     type="submit"
                                     title="Send Link"
                                     id="resetbtn"
+                                    isLoading={isLoading}
                                 />
                             </div>
                             <div className="text-right">
                                 <Link
-                                    className="py-4 inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
+                                    className="py-4 inline-block text-sm text-green-light align-baseline hover:text-green-primary"
                                     to="/signin"
                                 >
                                     Go Back?
@@ -93,7 +94,7 @@ export default function ForgotPassword() {
                             <div className="text-center">
                                 <Link
                                     to='/signup'
-                                    className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
+                                    className="inline-block text-sm text-green-light align-baseline hover:text-green-primary"
                                     href="./index.html">
                                     Don't have an account? Sign in!
                                 </Link>

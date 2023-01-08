@@ -24,7 +24,7 @@ const PasswordInput = (props) => {
 
     return (
         <>
-            <label className="block mb-2 text-sm font-bold text-gray-700"
+            <label className="block mb-2 font-poppins text-sm font-bold text-gray-800"
                 htmlFor={Name}>
                 {label}
             </label>

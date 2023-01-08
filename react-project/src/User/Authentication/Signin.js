@@ -10,7 +10,7 @@ import { EmptyNavbar } from '../../components/Navigation/EmptyNavbar';
 export default function Signin() {
 
     //Loading
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     // Error State
     const [errorMsg, setErrorMessage] = useState("");
 
@@ -81,6 +81,7 @@ export default function Signin() {
                                     type="submit"
                                     title="Login"
                                     id="loginbtn"
+                                    isLoading={isLoading}
                                 />
                             </div>
                             <div className="text-right">

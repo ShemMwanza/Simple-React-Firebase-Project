@@ -8,6 +8,7 @@ import {
     createUserWithEmailAndPassword,
     sendPasswordResetEmail,
     signOut,
+    updateProfile,
 } from "firebase/auth";
 import {
     getFirestore,
@@ -28,6 +29,7 @@ import {
     REACT_APP_appId,
     REACT_APP_measurementId
 } from '../Keys'
+import { getStorage } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -64,6 +66,9 @@ const createWithEmailAndPassword = async (displayName, email, password) => {
         authProvider: "local",
         email,
     });
+    updateProfile(auth.currentUser, {
+        displayName: displayName
+    });
 };
 
 const googleProvider = new GoogleAuthProvider();
@@ -85,13 +90,11 @@ const signInWithGoogle = async () => {
 };
 const sendPasswordReset = async (email) => {
     await sendPasswordResetEmail(auth, email);
-    alert("Password reset link sent!");
 };
 const logout = () => {
     signOut(auth);
 };
 
-// const FetchData = (id) => this.db.collection("users").doc(id).get();
 
 const FetchData = async (cl) => {
     // const [fetch, setFetch] = useState("")
@@ -99,12 +102,16 @@ const FetchData = async (cl) => {
         .then((querySnapshot) => {
             const data = querySnapshot.docs
                 .map((doc) => ({ ...doc.data(), id: doc.id }));
-            // setFetch(data);
-            // console.log(data);
             return ({data}); 
         })
 }
 
+const updatePhoto = async (uRl) => {
+    updateProfile(auth.currentUser, {
+        photoURL: uRl
+    })
+}
+export const storage = getStorage(app);
 export {
     auth,
     db,
@@ -113,5 +120,6 @@ export {
     createWithEmailAndPassword,
     sendPasswordReset,
     logout,
-    FetchData
+    FetchData,
+    updatePhoto
 };

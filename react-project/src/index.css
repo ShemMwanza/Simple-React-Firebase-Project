@@ -3,9 +3,13 @@
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
+html {
+    scroll-behavior: smooth;
+}
+
 @layer components {
     .btn-primary {
-        @apply w-full px-4 py-3 font-adelia  text-white bg-green-primary rounded-md hover:bg-green-light focus:outline-none;
+        @apply w-full px-4 py-3 font-adelia text-white bg-green-primary rounded-md hover:bg-green-light focus:outline-none;
     }
 
     .input-primary {

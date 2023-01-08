@@ -8,6 +8,7 @@ import {
 } from "firebase/firestore";
 import { auth, logout, db } from "../../Authentication/firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { ProfileImage } from '../Profile/ProfilePhoto';
 export default function Navbar() {
     const [menu, setMenu] = useState(false);
     const showMenu = () => setMenu(!menu)
@@ -16,31 +17,30 @@ export default function Navbar() {
     const showuserMenu = () => setuserMenu(!userMenu)
 
     const [user] = useAuthState(auth);
-    
+
     //Fetch Data
     const [fetch, setFetch] = useState([]);
- 
+
     const FetchData = () => {
-       
+
         getDocs(collection(db, "users"))
-            .then((querySnapshot)=>{              
+            .then((querySnapshot) => {
                 const newdata = querySnapshot.docs
-                    .map((doc) => ({...doc.data(), id:doc.id }));
+                    .map((doc) => ({ ...doc.data(), id: doc.id }));
                 setFetch(newdata);
             })
-       
     }
-   
-    useEffect(()=>{
+
+    useEffect(() => {
         FetchData();
     }, [])
 
     const ref = useRef();
-    
+
     useEffect(() => {
         const checkClick = e => {
             // Menu will be closed
-            if (userMenu  && ref.current && !ref.current.contains(e.target)) {
+            if (userMenu && ref.current && !ref.current.contains(e.target)) {
                 setMenu(false);
                 setuserMenu(false);
                 console.log("yesaa")
@@ -65,7 +65,7 @@ export default function Navbar() {
                         type="button"
                         className="flex mr-3 text-sm bg-white rounded-full focus:ring-gray-600">
                         <span className="sr-only">Open user menu</span>
-                        <img className="w-10 h-10 rounded-full" src="https://www.svgrepo.com/show/294228/password-forgot.svg" alt="Reset" />
+                        <ProfileImage className="w-10 h-10 rounded-full" />
                     </button>
                     <MenuButton />
                     {/* dropdown */}
@@ -74,24 +74,26 @@ export default function Navbar() {
                         "hidden"}
                     >
                         <div className="px-4 py-3">
-                            {
-                            fetch?.map((newdata,i) => (
-                            <span key={i} className="block text-sm text-gray-700">{newdata.name}</span>
-                            ))}
-                            <span className="block text-sm font-medium text-gray-700 truncate">{user.email}</span>
+                            {/* {
+                                fetch?.map((newdata, i) => (
+                                    <span key={i} className="block text-sm font-poppins text-gray-700">{newdata.name}</span>
+                                ))} */}
+                            <span className="block text-sm font-poppins text-gray-700">{user.displayName}</span>
+
+                            <span className="block text-sm font-poppins font-medium text-gray-700 truncate">{user.email}</span>
                         </div>
                         <ul className="py-1">
                             <li>
-                                <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:text-white hover:bg-green-primary">Profile</Link>
+                                <Link to="/profile" className="block px-4 py-2 font-poppins text-sm text-gray-700 hover:text-white hover:bg-green-primary">Profile</Link>
                             </li>
                             <li>
-                                <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:text-white hover:bg-green-primary">Settings</Link>
+                                <Link href="#" className="block px-4 py-2 font-poppins text-sm text-gray-700 hover:text-white hover:bg-green-primary">Settings</Link>
                             </li>
                             <li>
-                                <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:text-white hover:bg-green-primary">Earnings</Link>
+                                <Link href="#" className="block px-4 py-2 font-poppins text-sm text-gray-700 hover:text-white hover:bg-green-primary">Earnings</Link>
                             </li>
                             <li>
-                                <button onClick={logout} className="w-full  text-start block px-4 py-2 text-sm text-gray-700 hover:text-white hover:bg-green-primary">Sign out</button>
+                                <button onClick={logout} className="w-full font-poppins text-start block px-4 py-2 text-sm text-gray-700 hover:text-white hover:bg-green-primary">Sign out</button>
                             </li>
                         </ul>
                     </div>
@@ -126,7 +128,8 @@ export default function Navbar() {
     return (
         <>
 
-            <nav className="border-gray-200 px-2 sm:px-4 border py-2.5 rounded-b-3xl shadow-md bg-white">
+            <nav className={`${menu ? "h-54 border-gray-200 px-4 sm:px-4 border py-2.5 shadow-sm shadow-green-primary rounded-b-2xl  bg-white" : "h-54 rounded-b-3xl shadow-md bg-white py-3 px-2"}  transition-all ease-in-out delay-300 duration-700 overflow-hidden w-full`}>
+
                 <div className="container flex flex-wrap items-center justify-between mx-auto">
                     <NavHeader />
                     <>
@@ -138,7 +141,7 @@ export default function Navbar() {
                             )}
                     </>
                     <div className={menu ? "items-center justify-between w-full md:flex md:w-auto md:order-1" : "items-center justify-between hidden w-full md:flex md:w-auto md:order-1"} id="navbar-cta">
-                        <NavLinks  />
+                        <NavLinks />
                     </div>
                 </div>
             </nav>

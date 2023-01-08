@@ -10,7 +10,7 @@ const DefaultPasswordInput = (props) => {
 
     return (
         <>
-            <label className="block mb-2 text-sm font-bold text-gray-700" 
+            <label className="block font-poppins mb-2 text-sm font-bold text-gray-800" 
                 htmlFor={Name}>
                 {label}
             </label>
