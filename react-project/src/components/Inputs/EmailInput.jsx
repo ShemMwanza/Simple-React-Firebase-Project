@@ -6,6 +6,7 @@ const EmailInput = (props) => {
     const id = props.id;
     const placeholder = props.placeholder;
     const Name = props.Name;
+    const defaultValue = props.defaultValue
     const [errorMessage, setErrMsg] = useState('')
 
     const validate = (value) => {
@@ -35,6 +36,7 @@ const EmailInput = (props) => {
                 type="email"
                 name={Name}
                 placeholder={placeholder}
+                defaultValue={defaultValue}
                 onChange={(e) => validate(e.target.value)}
             />
             {errorMessage === '' ? null :

@@ -11,7 +11,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function Signup() {
     //Loading
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     //Error Message
     const [errorMsg, setErrorMessage] = useState("");
 
@@ -119,6 +119,7 @@ export default function Signup() {
                                     type="submit"
                                     title="Register"
                                     id="registerbtn"
+                                    isLoading={isLoading}
                                 />
                             </div>
                             <div className="my-6">

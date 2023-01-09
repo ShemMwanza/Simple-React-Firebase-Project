@@ -1,12 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import NavHeader from './NavHeader'
 import { Link } from 'react-router-dom';
-import NavLinks from './NavLinks'
-import {
-    getDocs,
-    collection,
-} from "firebase/firestore";
-import { auth, logout, db } from "../../Authentication/firebaseConfig";
+import NavLinks from './NavLinks';
+import { auth, logout } from "../../Authentication/firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ProfileImage } from '../Profile/ProfilePhoto';
 export default function Navbar() {
@@ -17,23 +13,6 @@ export default function Navbar() {
     const showuserMenu = () => setuserMenu(!userMenu)
 
     const [user] = useAuthState(auth);
-
-    //Fetch Data
-    const [fetch, setFetch] = useState([]);
-
-    const FetchData = () => {
-
-        getDocs(collection(db, "users"))
-            .then((querySnapshot) => {
-                const newdata = querySnapshot.docs
-                    .map((doc) => ({ ...doc.data(), id: doc.id }));
-                setFetch(newdata);
-            })
-    }
-
-    useEffect(() => {
-        FetchData();
-    }, [])
 
     const ref = useRef();
 
@@ -74,10 +53,6 @@ export default function Navbar() {
                         "hidden"}
                     >
                         <div className="px-4 py-3">
-                            {/* {
-                                fetch?.map((newdata, i) => (
-                                    <span key={i} className="block text-sm font-poppins text-gray-700">{newdata.name}</span>
-                                ))} */}
                             <span className="block text-sm font-poppins text-gray-700">{user.displayName}</span>
 
                             <span className="block text-sm font-poppins font-medium text-gray-700 truncate">{user.email}</span>

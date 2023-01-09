@@ -5,7 +5,8 @@ const TextInput = (props) => {
     const id = props.id;
     const placeholder = props.placeholder;
     const Name = props.Name;
-    const type = props.type
+    const type = props.type;
+    const defaultValue = props.defaultValue;
     return (
         <>
             <label 
@@ -18,6 +19,7 @@ const TextInput = (props) => {
                 className="input-primary mb-0"
                 id={id}
                 name={Name}
+                defaultValue={defaultValue}
                 onChange={event => console.log("value changed!")}
                 type={type}
                 placeholder={placeholder}

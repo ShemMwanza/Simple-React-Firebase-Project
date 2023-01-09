@@ -17,7 +17,7 @@ export default function Error() {
             </div>
             <div className="w-1/2 lg:h-full flex lg:items-end justify-center p-4">
                 <img src='/assets/404.svg'
-                    className='animate-pulse' />
+                    className='animate-pulse' alt='Error 404' />
             </div>
         </div>
     )
