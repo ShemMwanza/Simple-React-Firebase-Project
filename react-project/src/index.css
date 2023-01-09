@@ -9,15 +9,15 @@ html {
 
 @layer components {
     .btn-primary {
-        @apply w-full px-4 py-3 font-adelia text-white bg-green-primary rounded-md hover:bg-green-light focus:outline-none;
+        @apply w-full px-4 py-3 font-adelia text-white bg-green-primary rounded-md hover:bg-green-light focus:outline-none transition-all ease-in-out duration-300;
     }
 
     .input-primary {
-        @apply w-full px-4 py-3 mb-5 focus:ring-1 focus:ring-green-primary focus:ring-opacity-40 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none;
+        @apply w-full px-4 py-3 mb-5 focus:ring-1 focus:ring-green-primary focus:ring-opacity-40 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none transition-all ease-in-out duration-500 delay-100;
     }
 
     .input-error {
-        @apply w-full px-4 py-3 mb-5 focus:ring-1 shadow-md shadow-red-300 focus:ring-red-200 text-sm leading-tight text-gray-700 border rounded appearance-none focus:outline-none;
+        @apply w-full px-4 py-3 mb-5 focus:ring-1 shadow-md shadow-red-300 focus:ring-red-200 text-sm leading-tight text-gray-700 border rounded appearance-none focus:outline-none transition-all ease-in-out duration-500 delay-100;
     }
 
     .error-primary {

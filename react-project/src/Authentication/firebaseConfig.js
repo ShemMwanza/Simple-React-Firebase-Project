@@ -9,6 +9,7 @@ import {
     sendPasswordResetEmail,
     signOut,
     updateProfile,
+    updateEmail,
 } from "firebase/auth";
 import {
     getFirestore,
@@ -91,10 +92,10 @@ const signInWithGoogle = async () => {
 const sendPasswordReset = async (email) => {
     await sendPasswordResetEmail(auth, email);
 };
+
 const logout = () => {
     signOut(auth);
 };
-
 
 const FetchData = async (cl) => {
     // const [fetch, setFetch] = useState("")
@@ -111,6 +112,15 @@ const updatePhoto = async (uRl) => {
         photoURL: uRl
     })
 }
+
+const updateProfileDetails = async (displayName, email) => {
+     updateProfile(auth.currentUser, {
+        displayName: displayName
+    });
+     updateEmail(auth.currentUser, {
+        email: email
+    });
+}
 export const storage = getStorage(app);
 export {
     auth,
@@ -121,5 +131,6 @@ export {
     sendPasswordReset,
     logout,
     FetchData,
-    updatePhoto
+    updatePhoto,
+    updateProfileDetails
 };
