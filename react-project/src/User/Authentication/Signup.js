@@ -4,9 +4,8 @@ import LoadButton from '../../components/Buttons/LoadButton';
 import EmailInput from '../../components/Inputs/EmailInput';
 import PasswordInput from '../../components/Inputs/PasswordInput';
 import TextInput from '../../components/Inputs/TextInput'
-import { auth, createWithEmailAndPassword, signInWithGoogle } from "../../Authentication/firebaseConfig";
 import { EmptyNavbar } from '../../components/Navigation/EmptyNavbar';
-import { useAuthState } from "react-firebase-hooks/auth";
+import { useAuth } from '../../Context/AuthContext';
 
 
 export default function Signup() {
@@ -14,6 +13,8 @@ export default function Signup() {
     const [isLoading, setIsLoading] = useState(false);
     //Error Message
     const [errorMsg, setErrorMessage] = useState("");
+
+    const { currentUser, createWithEmailAndPassword, signInWithGoogle} = useAuth();
 
     // Form Submit
     const handleSubmit = async e => {
@@ -44,14 +45,12 @@ export default function Signup() {
         })
     }
     };
-    const [user] = useAuthState(auth);
     const navigate = useNavigate();
     useEffect(() => {
-
-        if (user){ 
-            navigate("/")
-        };
-    });
+        if (currentUser) {
+            navigate("/");
+        }
+    }, [currentUser, navigate]);
     return (
 
         <section className="container mx-auto">

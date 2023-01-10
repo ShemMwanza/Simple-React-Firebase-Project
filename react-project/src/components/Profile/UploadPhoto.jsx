@@ -1,9 +1,10 @@
 import React from "react"
 import { useState } from "react";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { auth, storage, updatePhoto } from "../../Authentication/firebaseConfig";
+import { storage } from "../../Authentication/firebaseConfig";
 import LoadButton from "../Buttons/LoadButton";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { useAuth } from "../../Context/AuthContext";
+
 export default function UploadPhoto({ showUpload }) {
     const [imgUrl, setImgUrl] = useState(null);
     //Loading
@@ -11,15 +12,15 @@ export default function UploadPhoto({ showUpload }) {
 
     const [errorMsg, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+    const { currentUser, updatePhoto } = useAuth();
 
-    const [user] = useAuthState(auth);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const file = e.target[0]?.files[0]
         console.log(e.target[0]?.files[0]);
         if (!file) return;
-        const storageRef = ref(storage, `ProfilePhotos/${user.uid + '/' + file.name}`);
+        const storageRef = ref(storage, `ProfilePhotos/${currentUser.uid + '/' + file.name}`);
         const uploadTask = uploadBytesResumable(storageRef, file);
 
         uploadTask.on("state_changed",
@@ -33,10 +34,10 @@ export default function UploadPhoto({ showUpload }) {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                     setImgUrl(downloadURL);
                     updatePhoto(downloadURL);
-                    setSuccessMessage("Check your email for the link")
+                    setSuccessMessage("Image Updated Successfully")
                 });
                 setIsLoading(false);
-                showUpload();
+                // showUpload();
             }
         );
     }

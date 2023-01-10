@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import TextInput from '../../components/Inputs/TextInput';
-import { auth, sendPasswordReset } from "../../Authentication/firebaseConfig";
-import { useAuthState } from "react-firebase-hooks/auth";
 import LoadButton from '../../components/Buttons/LoadButton';
+import { useAuth } from '../../Context/AuthContext';
 
 export default function ForgotPassword() {
 
@@ -13,13 +12,14 @@ export default function ForgotPassword() {
     const [errorMsg, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
 
-    const [user] = useAuthState(auth);
+    const { currentUser, sendPasswordReset } = useAuth();
+
     const navigate = useNavigate();
     useEffect(() => {
-        if (user) {
-            navigate("/")
-        };
-    });
+        if (currentUser) {
+            navigate("/");
+        }
+    }, [currentUser, navigate]);
 
     // Form Submit
     const handleSubmit = async e => {

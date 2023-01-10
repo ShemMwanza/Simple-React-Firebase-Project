@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import DefaultPasswordInput from '../../components/Inputs/DefaultPasswordInput';
 import TextInput from '../../components/Inputs/TextInput';
-import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../../Authentication/firebaseConfig";
-import { useAuthState } from "react-firebase-hooks/auth";
 import LoadButton from '../../components/Buttons/LoadButton';
 import { EmptyNavbar } from '../../components/Navigation/EmptyNavbar';
+import { useAuth } from '../../Context/AuthContext';
 
 export default function Signin() {
 
@@ -14,13 +13,14 @@ export default function Signin() {
     // Error State
     const [errorMsg, setErrorMessage] = useState("");
 
-    const [user] = useAuthState(auth);
+    const { currentUser, logInWithEmailAndPassword, signInWithGoogle } = useAuth();
+
     const navigate = useNavigate();
     useEffect(() => {
-        if (user) {
+        if (currentUser) {
             navigate("/");
         }
-    });
+    }, [currentUser, navigate]);
 
     // Form Submit
     const handleSubmit = async e => {

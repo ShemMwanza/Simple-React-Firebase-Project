@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, updateProfileDetails } from '../../Authentication/firebaseConfig';
 import LoadButton from '../Buttons/LoadButton';
 import TextInput from '../Inputs/TextInput';
 import EmailInput from '../Inputs/EmailInput';
+import { useAuth } from '../../Context/AuthContext';
+
 
 export default function UpdateDetails({ showUpdate }) {
     //Loading
@@ -11,7 +11,11 @@ export default function UpdateDetails({ showUpdate }) {
     // Error State
     const [errorMsg, setErrorMessage] = useState("");
 
-    const [user] = useAuthState(auth);
+    const [successMessage, setSuccessMessage] = useState("");
+
+
+    const { currentUser, updateProfileDetails } = useAuth();
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -20,6 +24,7 @@ export default function UpdateDetails({ showUpdate }) {
 
         updateProfileDetails(displayName, email).then(() => {
             setIsLoading(false);
+            setSuccessMessage("Details Updated Successfully")
         }).catch((error) => {
             console.log(error.code)
             if (error.code === "auth/user-not-found") {
@@ -46,6 +51,7 @@ export default function UpdateDetails({ showUpdate }) {
                                 </svg>
                             </div>
                             <h3 className="pt-4 text-2xl text-center">Update Details</h3>
+                            <p className='my-4 font-poppins text-xs text-center'>*Be recently logged in to update your email</p>
                             <form
                                 onSubmit={handleSubmit}
                                 className="px-8 pt-4 pb-8 mb-4 bg-white rounded">
@@ -57,7 +63,7 @@ export default function UpdateDetails({ showUpdate }) {
                                         Name="displayName"
                                         placeholder='Full Name'
                                         type="text" 
-                                        defaultValue={user.displayName}
+                                        defaultValue={currentUser.displayName}
                                     />
 
                                 </div>
@@ -67,10 +73,14 @@ export default function UpdateDetails({ showUpdate }) {
                                         id="email"
                                         placeholder="Email"
                                         Name="email"
-                                        defaultValue={user.email}
+                                        defaultValue={currentUser.email}
                                     />
 
                                 </div>
+                                {successMessage === '' ? null :
+                                    <div className='success-primary mb-2'>
+                                        {successMessage}
+                                    </div>}
                                 {errorMsg === '' ? null :
                                     <div className='error-primary mb-2'>
                                         {errorMsg}

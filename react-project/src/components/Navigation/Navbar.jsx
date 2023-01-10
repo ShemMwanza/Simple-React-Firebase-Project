@@ -2,9 +2,8 @@ import React, { useState, useEffect, useRef } from 'react'
 import NavHeader from './NavHeader'
 import { Link } from 'react-router-dom';
 import NavLinks from './NavLinks';
-import { auth, logout } from "../../Authentication/firebaseConfig";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { ProfileImage } from '../Profile/ProfilePhoto';
+import { useAuth } from '../../Context/AuthContext';
 export default function Navbar() {
     const [menu, setMenu] = useState(false);
     const showMenu = () => setMenu(!menu)
@@ -12,7 +11,7 @@ export default function Navbar() {
     const [userMenu, setuserMenu] = useState(false);
     const showuserMenu = () => setuserMenu(!userMenu)
 
-    const [user] = useAuthState(auth);
+    const { currentUser,logout} = useAuth();
 
     const ref = useRef();
 
@@ -53,9 +52,9 @@ export default function Navbar() {
                         "hidden"}
                     >
                         <div className="px-4 py-3">
-                            <span className="block text-sm font-poppins text-gray-700">{user.displayName}</span>
+                            <span className="block text-sm font-poppins text-gray-700">{currentUser.displayName}</span>
 
-                            <span className="block text-sm font-poppins font-medium text-gray-700 truncate">{user.email}</span>
+                            <span className="block text-sm font-poppins font-medium text-gray-700 truncate">{currentUser.email}</span>
                         </div>
                         <ul className="py-1">
                             <li>
@@ -108,7 +107,7 @@ export default function Navbar() {
                 <div className="container flex flex-wrap items-center justify-between mx-auto">
                     <NavHeader />
                     <>
-                        {user ? (
+                        {currentUser ? (
                             <UserButton />
                         ) :
                             (

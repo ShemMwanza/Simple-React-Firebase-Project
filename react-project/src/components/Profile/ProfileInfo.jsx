@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, sendPasswordReset } from '../../Authentication/firebaseConfig'
+import { useAuth } from '../../Context/AuthContext';
 
 import LoadButton from '../Buttons/LoadButton';
 
 export default function ProfileInfo({ showUpdate }) {
-    const [user] = useAuthState(auth);
+    const { currentUser,sendPasswordReset } = useAuth();
     //Loading
     const [isLoading, setIsLoading] = useState(false);
     const [errorMsg, setErrorMessage] = useState("");
@@ -33,13 +32,13 @@ export default function ProfileInfo({ showUpdate }) {
 
                     <div className="px-4 py-4 font-semibold">Full Name:</div>
                     <div className="px-4 py-4">
-                        <p className='font-poppins text-center'>{user.displayName}</p>
+                        <p className='font-poppins text-center'>{currentUser.displayName}</p>
                     </div>
                 </div>
                 <div className="grid grid-cols-2">
                     <div className="px-4 py-4 font-semibold">Email:</div>
                     <div className="px-4 py-4">
-                        <p className='font-poppins text-center'>{user.email}</p>
+                        <p className='font-poppins text-center'>{currentUser.email}</p>
                     </div>
                 </div>
                 <div className="flex flex-col w-full my-4">
@@ -47,7 +46,7 @@ export default function ProfileInfo({ showUpdate }) {
                         <input className='hidden'
                             name='email'
                             onChange={event => console.log("value changed!")}
-                            value={user.email} />
+                            value={currentUser.email} />
                         <LoadButton
                             type="submit"
                             title="Change Password"
