@@ -1,25 +1,14 @@
-// import { useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { useAuth } from "../Context/AuthContext";
-// const PrivateRoute = ({ children }) => {
-//     const { currentUser } = useAuth();
-//     const navigate = useNavigate();
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../Context/AuthContext";
+const PrivateRoute = ({ children }) => {
+  const { currentUser } = useAuth();
 
-    
+  if (currentUser) {
+    return children;
+  }
+  else{
+    return <Navigate to="/signin" />;
+  }
+};
 
-//         console.log("There is no user");
-//         useEffect(() => {
-//             if (currentUser) {
-//                 console.log("There is user");
-//                 // return (children);
-//             }else{
-
-//             navigate("/");}
-
-//         }, [currentUser, navigate]);
-//         // return (null);
-//         // return (<Navigate to='/'/>)
-    
-// };
-
-// export default PrivateRoute;
+export default PrivateRoute;

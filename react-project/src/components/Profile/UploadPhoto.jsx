@@ -9,10 +9,13 @@ export default function UploadPhoto({ showUpload }) {
     const [imgUrl, setImgUrl] = useState(null);
     //Loading
     const [isLoading, setIsLoading] = useState(false);
-
+    const [picture, setPicture] = useState(null);
     const [errorMsg, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const { currentUser, updatePhoto } = useAuth();
+    const onChangePicture = e => {
+        setPicture(URL.createObjectURL(e.target.files[0]));
+    };
 
 
     const handleSubmit = (e) => {
@@ -66,7 +69,7 @@ export default function UploadPhoto({ showUpload }) {
                                 </div>
                                 <p className="pointer-none text-gray-500 "><span className="text-sm">Drag and drop</span> files here <br /> or <span className="text-blue-600 hover:underline">select a file</span> from your computer</p>
                             </div>
-                            <input type="file" className="hidden" />
+                            <input type="file" className="hidden" onChange={onChangePicture} />
                         </label>
                     </div>
                 </div>
@@ -94,6 +97,7 @@ export default function UploadPhoto({ showUpload }) {
                     imgUrl &&
                     <img src={imgUrl} alt='uploaded file' className="h-10" />
                 }
+                <img src={picture} alt="file" className={imgUrl?"hidden":"h-10" }/>
             </form>
         </div>
     )
