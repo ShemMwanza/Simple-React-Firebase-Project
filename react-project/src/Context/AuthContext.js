@@ -18,6 +18,7 @@ import {
     collection,
     where,
     addDoc,
+    doc,
 } from "firebase/firestore";
 import { useState } from "react";
 
@@ -109,6 +110,17 @@ export function AuthProvider({ children }) {
 
         return unsubscribe;
     }, []);
+
+
+    const addToCart = async (productId,img_url, title, price) => {
+        const cartRef = doc(collection(db, "cart").collection(currentUser.uid).doc(productId))
+
+        await addDoc(cartRef, {
+            img_url,
+            title,
+            price
+        });
+    };
     const value = {
         currentUser,
         logInWithEmailAndPassword,
@@ -117,7 +129,8 @@ export function AuthProvider({ children }) {
         updateProfileDetails,
         updatePhoto,
         logout,
-        sendPasswordReset
+        sendPasswordReset,
+        addToCart
     };
 
     return (

@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import DefaultPasswordInput from '../../components/Inputs/DefaultPasswordInput';
 import TextInput from '../../components/Inputs/TextInput';
 import LoadButton from '../../components/Buttons/LoadButton';
-import { EmptyNavbar } from '../../components/Navigation/EmptyNavbar';
+import { EmptyNavbar } from '../../components/Navigation/Navbar/EmptyNavbar';
 import { useAuth } from '../../Context/AuthContext';
 
 export default function Signin() {

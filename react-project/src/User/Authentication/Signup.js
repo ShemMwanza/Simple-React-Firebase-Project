@@ -4,7 +4,7 @@ import LoadButton from '../../components/Buttons/LoadButton';
 import EmailInput from '../../components/Inputs/EmailInput';
 import PasswordInput from '../../components/Inputs/PasswordInput';
 import TextInput from '../../components/Inputs/TextInput'
-import { EmptyNavbar } from '../../components/Navigation/EmptyNavbar';
+import { EmptyNavbar } from '../../components/Navigation/Navbar/EmptyNavbar';
 import { useAuth } from '../../Context/AuthContext';
 
 

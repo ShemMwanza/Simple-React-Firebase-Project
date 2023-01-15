@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Navbar from '../../components/Navigation/Navbar'
+import Navbar from '../../components/Navigation/Navbar/Navbar'
 import ProfileDetails from '../../components/Profile/ProfileDetails'
 import ProfileHeader from '../../components/Profile/ProfileHeader';
 import UpdateDetails from '../../components/Profile/UpdateDetails';

@@ -1,0 +1,21 @@
+.tab-enter {
+    opacity: 0;
+    transform: translateX(-56px);
+}
+
+.tab-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity, transform 150ms;
+}
+
+.tab-exit {
+    opacity: 1;
+}
+
+.tab-exit-active {
+    opacity: 0;
+    transform: translateX(-56px);
+
+    transition: opacity, transform 150ms;
+}

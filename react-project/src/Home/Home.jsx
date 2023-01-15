@@ -1,7 +1,7 @@
 import React from 'react'
+import HomeDataCategory from '../components/Home/HomeDataCategory'
 import { Footer } from '../components/Navigation/Footer/Footer'
 import Navbar from '../components/Navigation/Navbar/Navbar'
-import ProductBox from '../components/Products/ProductBox'
 
 export default function Home() {
   return (
@@ -20,30 +20,17 @@ export default function Home() {
 
         </section>
 
+        <HomeDataCategory />
 
-        <section className='w-full bg-white'>
-          <img src='/assets/l.svg' alt='home' className='w-full bottom-0 ' />
-          <div className='px-4 sm:px-8 md:px-16'>
-            <h1 className='text-2xl font-semi-bold text-center py-8 sm:text-4xl font-poppins text-gray-800'>Popular Options</h1>
-            <div className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              <ProductBox name="This is the Name" price="3000" />
-              <ProductBox name="This is the Name" price="3000" />
-              <ProductBox name="This is the Name" price="3000" />
-              <ProductBox name="This is the Name" price="3000" />
-
-            </div>
-          </div>
-        </section>
-
-        <section className='bg-white w-full py-2 sm:py-6 md:p-10'>
-          <div className=' w-full flex bg-orange-primary bg-opacity-25 flex-col sm:flex-row md:py-12 px-6 md:px-24'>
-            <div className='w-1/2 '>
+        <section className='bg-white w-full py-2 sm:p-10 md:p-16 lg:px-20'>
+          <div className=' w-full flex my-10 rounded-md bg-orange-primary bg-opacity-40 flex-col md:flex-row py-8 sm:py-10 md:py-12 px-6 md:px-24'>
+            <div className='w-full md:w-1/2 '>
               <img src='/assets/homeasset.png' className='h-full' alt="home" />
             </div>
-            <div className='w-1/2 flex flex-col'>
+            <div className='w-full md:w-1/2 flex flex-col'>
               <h2 className="text-xl font-sans font-semibold text-center text-gray-700 sm:text-3xl"> What Happens</h2>
               <p
-                className='py-4 text-center  sm:py-6  text-gray-600'>
+                className='py-4 text-center sm:py-6 text-gray-600'>
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                 when an unknown printer took a galley of type and scrambled it to make a type specimen
@@ -51,7 +38,7 @@ export default function Home() {
                 remaining essentially unchanged. 
               </p>
               <div className='flex w-full justify-center'>
-              <button className='w-1/4 btn-primary'>Learn More</button></div>
+              <button className='w-1/2 sm:w-1/4 btn-primary bg-white text-gray-800 hover:text-white'>Learn More</button></div>
             </div>
           </div>
         </section>
