@@ -19,6 +19,7 @@ import {
     where,
     addDoc,
     doc,
+    setDoc,
 } from "firebase/firestore";
 import { useState } from "react";
 
@@ -112,14 +113,16 @@ export function AuthProvider({ children }) {
     }, []);
 
 
-    const addToCart = async (productId,img_url, title, price) => {
-        const cartRef = doc(collection(db, "cart").collection(currentUser.uid).doc(productId))
-
-        await addDoc(cartRef, {
-            img_url,
-            title,
-            price
+    const addToCart = async (productID, img, title, price) => {
+        // await DB.collection("cart" + currentUser.uid).doc(productId).set(newdata)
+        const cartRef = doc(db, "cart: " + currentUser.uid, productID);
+        await setDoc(cartRef, {
+            productID: productID,
+            img: img,
+            title: title,
+            price: price
         });
+
     };
     const value = {
         currentUser,

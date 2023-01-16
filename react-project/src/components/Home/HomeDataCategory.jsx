@@ -1,5 +1,6 @@
 import { collection, getDocs } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { db } from '../../Authentication/firebaseConfig';
 import { useAuth } from '../../Context/AuthContext';
 import Loading from '../Loading/Loading';
@@ -25,21 +26,27 @@ export default function HomeDataCategory() {
     useEffect(() => {
         FetchData();
     }, [])
-    const { addToCart } = useAuth();
+    const { addToCart, currentUser } = useAuth();
+    const navigate = useNavigate();
     // Form Submit
     const handleSubmit = async e => {
         e.preventDefault();
-        const productId = e.target.productId.value;
-        const img_url = e.target.imgName.value;
-        const title = e.target.imgName.value;
-        const price = e.target.imgName.value;
-        
-        addToCart(productId, img_url, title, price).then(() => {})
-        .catch ((error) => {
-            console.log(error.code)
-                alert("User Account Does Not Exist");
-    
-        })
+        if (currentUser) {
+            const productID = e.target.productId.value;
+            const img = e.target.imgName.value;
+            const title = e.target.titleName.value;
+            const price = e.target.priceName.value;
+            console.log(productID)
+
+            addToCart(productID, img, title, price).then(() => { })
+                .catch((error) => {
+                    console.log(error.code)
+                    alert(error);
+                })
+        }
+        else {
+            navigate("/signin");
+        }
     }
     return (
         <>
@@ -51,9 +58,9 @@ export default function HomeDataCategory() {
                         {fetch?.map((newdata, i) => (
                             <div key={i} className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                                 <form onSubmit={handleSubmit}>
-                                <ProductBox
-                                        img_url={newdata.img_url} imgName="imgName" titleName="titleName" title={newdata.name} price={newdata.price} />
-                                    <input className='hidden' name='productId' defaultValue={i}/>
+                                    <ProductBox
+                                        img_url={newdata.img_url} imgName="imgName" titleName="titleName" priceName="priceName" title={newdata.name} price={newdata.price} />
+                                    <input className='hidden' name='productId' defaultValue={newdata.productID} />
                                 </form>
                             </div>
                         ))}
