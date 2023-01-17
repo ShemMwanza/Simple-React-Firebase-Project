@@ -9,6 +9,15 @@ module.exports = {
         green: {
           primary: '#008080',
           light: '#339ea6'
+        },
+        cream: {
+          primary: '#FFFDD2'
+        },
+        crayola: {
+          primary: '#FFC969'
+        },
+        orange: {
+          primary: "#FFA503"
         }
       },
       animation: {

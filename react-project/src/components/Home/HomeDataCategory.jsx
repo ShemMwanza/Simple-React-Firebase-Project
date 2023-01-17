@@ -19,7 +19,7 @@ export default function HomeDataCategory() {
                 const newdata = querySnapshot.docs
                     .map((doc) => ({ ...doc.data(), id: doc.id }));
                 setFetch(newdata);
-                // console.log(fetch);
+                console.log("newdata: " + newdata);
                 setLoading(false);
             });
     }
