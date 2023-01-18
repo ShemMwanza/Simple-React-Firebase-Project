@@ -7,6 +7,7 @@ import Profile from './User/Account/Profile';
 import Home from './Home/Home';
 import { AuthProvider } from './Context/AuthContext';
 import PrivateRoute from './utils/PrivateRouter';
+import Products from './components/Products/Products';
 function App() {
   return (
     <>
@@ -20,7 +21,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/forgotpassword" element={<ForgotPassword />} />
             <Route path="/*" element={<Error />} />
-                        
+            <Route path="/products" element={<Products />} />        
             <Route path="/profile" element={<PrivateRoute> <Profile /> </PrivateRoute>} />
             {/* <Route path="/profile" element={<Profile />} /> */}
 

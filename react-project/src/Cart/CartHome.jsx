@@ -21,22 +21,16 @@ export default function CartHome({ showCart }) {
                 if(newdata.length < 1){
                     setMessage("There is no item in cart");
                 }
-
                 console.log("fetchwi: " + newdata.length)
                 // console.log(fetch);
                 setLoading(false);
             });
     }
-
-
     console.log("ID: " + ID);
     function DeleteCart() {
         deleteDoc(doc(db, "cart: " + currentUser.uid, ID));
     }
-    if (ID.length > 0) {
-        console.log("ID is present");
-        DeleteCart();
-    }
+
     useEffect(() => {
         if (ID.length > 0) {
             console.log("ID is present");
@@ -81,9 +75,7 @@ export default function CartHome({ showCart }) {
                                         title={newdata.title}
                                         price={newdata.price}
                                         quantity="quantity"
-                                        deleteCart={() => {setID(newdata.productID)}}
-                                            
-                                       
+                                        deleteCart={() => {setID(newdata.productID)}} 
                                         id={newdata.productID}
                                         idName="productId" />
                                 </form>

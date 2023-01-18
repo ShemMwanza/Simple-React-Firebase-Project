@@ -62,6 +62,7 @@ export default function HomeDataCategory() {
                                         img_url={newdata.img_url} imgName="imgName" titleName="titleName" priceName="priceName" title={newdata.name} price={newdata.price} />
                                     <input className='hidden' name='productId' defaultValue={newdata.productID} />
                                 </form>
+                                
                             </div>
                         ))}
                     </div>

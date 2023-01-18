@@ -118,7 +118,7 @@ export function AuthProvider({ children }) {
         const cartRef = doc(db, "cart: " + currentUser.uid, productID);
         await setDoc(cartRef, {
             productID: productID,
-            img: img,
+            img_url: img,
             title: title,
             price: price
         });

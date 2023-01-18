@@ -18,6 +18,9 @@ module.exports = {
         },
         orange: {
           primary: "#FFA503"
+        },
+        pink: {
+          primary: "#db3448"
         }
       },
       animation: {
