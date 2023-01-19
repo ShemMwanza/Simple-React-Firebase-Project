@@ -23,6 +23,9 @@ export default function Products() {
     //Fetch Data
     const [loading, setLoading] = useState(false);
 
+    const [prodID, setProdID] = useState([]);
+    const navigate = useNavigate();
+
     const FetchData = async () => {
         setLoading(true);
         getDocs(collection(db, "products"))
@@ -36,10 +39,13 @@ export default function Products() {
             });
     }
     useEffect(() => {
+        if (prodID.length > 0) {
+            console.log("ID is present:" + prodID);
+            navigate(`/product/${prodID}`);
+        }
         FetchData();
-    }, [])
+    }, [prodID])
     const { addToCart, currentUser } = useAuth();
-    const navigate = useNavigate();
     // Form Submit
     const handleSubmit = async e => {
         e.preventDefault();
@@ -66,24 +72,26 @@ export default function Products() {
                 <Navbar />
                 <ProductsHeader />
                 {loading ? (<Loading />) : (
-                <section className='w-11/12 mx-auto'>
-                    
-                    {currentItems?.map((newdata, i) => (
-                        <div key={i} className="py-8 mx-2 lg:inline-flex">
-                            <form onSubmit={handleSubmit}>
-                                <ProductBox
-                                    img_url={newdata.img_url}
-                                    id={newdata.productID}
-                                    imgName="imgName"
-                                    titleName="titleName"
-                                    priceName="priceName"
-                                    title={newdata.name}
-                                    price={newdata.price} />
-                                <input className='hidden' name='productId' defaultValue={newdata.productID} />
-                            </form>
+                    <section className='w-11/12 mx-auto'>
+                        <div className='flex flex-col py-8 md:inline-grid grid-cols-3 gap-4'>
+                            {currentItems?.map((newdata, i) => (
+                                <form key={i} onSubmit={handleSubmit}>
+                                    <div className='hover:opacity-70 transition-all ease-in-out duration-500 delay-100 cursor-pointer'>
+                                        <ProductBox
+                                            img_url={newdata.img_url}
+                                            id={newdata.productID}
+                                            imgName="imgName"
+                                            titleName="titleName"
+                                            priceName="priceName"
+                                            onClick={() => { setProdID(newdata.productID) }}
+                                            title={newdata.name}
+                                            price={newdata.price} />
+                                        <input className='hidden' name='productId' defaultValue={newdata.productID} />
+                                    </div>
+                                </form>
+                            ))}
                         </div>
-                    ))}
-                </section>
+                    </section>
                 )}
                 <div className="w-full flex justify-center my-4">
                     <div className="flex">

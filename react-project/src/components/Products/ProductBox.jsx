@@ -11,13 +11,13 @@ export default function ProductBox(props) {
     return (
         <>
             <div className="flex flex-col items-center justify-center w-full sm:4/5 max-w-lg mx-auto">
-                <img className="object-cover w-full rounded-md h-72 xl:h-80" src={img_url} alt="Item" />
+                <img className="object-cover w-full rounded-md h-72 xl:h-80" onClick={props.onClick} src={img_url} alt="Item" />
                 <div className="px-2 w-full">
                     <input
                         name={titleName}
                         className="mt-2 text-lg w-full text-justify font-poppins font-medium text-gray-800" defaultValue={title} />
                     <div className='py-2 w-full flex items-center justify-between'>
-                        <p className="text-xl font-medium text-green-primary">KES {price}</p>
+                        <p className="text-xl md:text-lg lg:text-xl font-medium text-green-primary">KES {price}</p>
                         <input className='hidden' name={priceName} defaultValue={price} />
                         <input className='hidden' name={imgName} defaultValue={img_url} />
                         <button
