@@ -4,23 +4,34 @@ import CartProduct from './CartProduct';
 import { db } from '../Authentication/firebaseConfig';
 import { useAuth } from '../Context/AuthContext';
 import Loading from '../components/Loading/Loading';
+import CartBottom from './CartBottom';
 
 export default function CartHome({ showCart }) {
     const { currentUser } = useAuth();
     const [ID, setID] = useState([])
     const [fetch, setFetch] = useState([]);
+    const [sum, setSum]= useState(0);
     const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
+    const calcPrice = (item) => {
+            return item.reduce((accumulator, object) => {
+                return accumulator + object.price;
+            }, 0);
+        };
     const FetchData = async () => {
         setLoading(true);
+        
         getDocs(collection(db, "cart: " + currentUser.uid))
             .then((querySnapshot) => {
                 const newdata = querySnapshot.docs
                     .map((doc) => ({ ...doc.data(), id: doc.id }));
                 setFetch(newdata);
-                if(newdata.length < 1){
+                // newdata.map(obj => ({ title: obj.title, price: obj.price }))
+                let t = 0;
+                if (newdata.length < 1) {
                     setMessage("There is no item in cart");
                 }
+                console.log(calcPrice(newdata));
                 console.log("fetchwi: " + newdata.length)
                 // console.log(fetch);
                 setLoading(false);
@@ -61,36 +72,34 @@ export default function CartHome({ showCart }) {
                                 </path> </g>
                         </svg>
                     </div>
-                    <section className="h-1/2 my-4">
-                        <p className='text-gray-900 text-lg'>{message}</p>
-                        {loading ? (<Loading />) : (
-                            fetch?.map((newdata, i) => (
-                                <form key={i} onSubmit={handleSubmit}>
-                                    {/* {() => setID(newdata.productID)} */}
-                                    <CartProduct
-                                        img_url={newdata.img_url}
-                                        imgName="imgName"
-                                        titleName="titleName"
-                                        priceName="priceName"
-                                        title={newdata.title}
-                                        price={newdata.price}
-                                        quantity="quantity"
-                                        deleteCart={() => {setID(newdata.productID)}} 
-                                        id={newdata.productID}
-                                        idName="productId" />
-                                </form>
+                    <form onSubmit={handleSubmit}>
+                        <section className=" my-4">
+                            <p className='text-gray-900 text-lg'>{message}</p>
 
-                            )))}
-                    </section>
+                            {loading ? (<Loading />) : (
+                                fetch?.map((newdata, i) => (
 
-                    {/* <div className="mb-2 text-center">
-                                    <LoadButton
-                                        type="submit"
-                                        title="Update"
-                                        id="updateBtn"
-                                        isLoading={isLoading}
-                                    />
-                                </div> */}
+                                    <div key={i} className="h-1/2 overflow-y-scroll">
+                                        {/* {() => setID(newdata.productID)} */}
+                                        <CartProduct
+                                            img_url={newdata.img_url}
+                                            imgName="imgName"
+                                            titleName="titleName"
+                                            priceName="priceName"
+                                            title={newdata.title}
+                                            price={newdata.price}
+                                            quantity="quantity"
+                                            deleteCart={() => { setID(newdata.productID) }}
+                                            id={newdata.productID}
+                                            idName="productId" />
+                                            
+                                    </div>
+                                    
+                                )))}                            
+                        </section>
+                        
+                        <CartBottom price={calcPrice(fetch)} />
+                    </form>
 
                 </div>
             </section>
