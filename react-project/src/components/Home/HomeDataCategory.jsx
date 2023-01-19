@@ -55,16 +55,15 @@ export default function HomeDataCategory() {
                     <img src='/assets/l.svg' alt='home' className='w-full bottom-0 ' />
                     <div className='px-4 sm:px-8 md:px-16'>
                         <h1 className='text-2xl font-semi-bold text-center py-8 sm:text-4xl font-poppins text-gray-800'>Popular Options</h1>
-                        {fetch?.map((newdata, i) => (
-                            <div key={i} className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                                <form onSubmit={handleSubmit}>
+                        <div className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                            {fetch?.map((newdata, i) => (
+                                <form key={i} onSubmit={handleSubmit}>
                                     <ProductBox
                                         img_url={newdata.img_url} imgName="imgName" titleName="titleName" priceName="priceName" title={newdata.name} price={newdata.price} />
                                     <input className='hidden' name='productId' defaultValue={newdata.productID} />
                                 </form>
-                                
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </section>
             )

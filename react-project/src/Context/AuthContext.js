@@ -120,7 +120,7 @@ export function AuthProvider({ children }) {
             productID: productID,
             img_url: img,
             title: title,
-            price: price
+            price: parseInt(price) 
         });
 
     };

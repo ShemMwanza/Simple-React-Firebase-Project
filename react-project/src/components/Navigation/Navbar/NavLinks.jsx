@@ -10,13 +10,13 @@ export default function NavLinks() {
                   <Link to="/" className="block py-2 pl-3 pr-4 font-poppins text-gray-700 rounded hover:text-white hover:bg-green-primary md:hover:bg-transparent md:hover:text-green-primary md:p-0" aria-current="page">Home</Link>
               </li>
               <li>
+                  <Link to="/products" className="block py-2 pl-3 pr-4 font-poppins text-gray-700 rounded hover:text-white hover:bg-green-primary md:hover:bg-transparent md:hover:text-green-primary md:p-0">Products</Link>
+              </li>
+              <li>
                   <Link to="/" className="block py-2 pl-3 pr-4 font-poppins text-gray-700 rounded hover:text-white hover:bg-green-primary md:hover:bg-transparent md:hover:text-green-primary md:p-0">About</Link>
               </li>
               <li>
                   <Link to="/" className="block py-2 pl-3 pr-4 font-poppins text-gray-700 rounded hover:text-white hover:bg-green-primary md:hover:bg-transparent md:hover:text-green-primary md:p-0">Offers</Link>
-              </li>
-              <li>
-                  <Link to="/" className="block py-2 pl-3 pr-4 font-poppins text-gray-700 rounded hover:text-white hover:bg-green-primary md:hover:bg-transparent md:hover:text-green-primary md:p-0">Latest</Link>
               </li>
               <li>
                   <Link to="/" className="block py-2 pl-3 pr-4 font-poppins text-gray-700 rounded hover:text-white hover:bg-green-primary md:hover:bg-transparent md:hover:text-green-primary md:p-0">Contact</Link>
