@@ -21,7 +21,7 @@ export default function CartHome({ showCart }) {
     const FetchData = async () => {
         setLoading(true);
         
-        getDocs(collection(db, "cart: " + currentUser.uid))
+        getDocs(collection(db, "cart", currentUser.uid, currentUser.uid ))
             .then((querySnapshot) => {
                 const newdata = querySnapshot.docs
                     .map((doc) => ({ ...doc.data(), id: doc.id }));
@@ -39,7 +39,7 @@ export default function CartHome({ showCart }) {
     }
     console.log("ID: " + ID);
     function DeleteCart() {
-        deleteDoc(doc(db, "cart: " + currentUser.uid, ID));
+        deleteDoc(doc(db, "cart", currentUser.uid, currentUser.uid, ID));
     }
 
     useEffect(() => {

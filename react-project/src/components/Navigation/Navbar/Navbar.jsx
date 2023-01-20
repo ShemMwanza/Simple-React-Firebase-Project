@@ -6,6 +6,7 @@ import { ProfileImage } from '../../Profile/ProfilePhoto';
 import { useAuth } from '../../../Context/AuthContext';
 import CartHome from '../../../Cart/CartHome';
 export default function Navbar() {
+    
     const [cart, setCart] = useState(false);
     const showCart = () => setCart(!cart);
 
