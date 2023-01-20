@@ -20,9 +20,10 @@ import {
     addDoc,
     doc,
     setDoc,
+    deleteDoc,
 } from "firebase/firestore";
 import { useState } from "react";
-
+import { v4 as uuid } from 'uuid';
 
 const AuthContext = createContext();
 
@@ -94,7 +95,6 @@ export function AuthProvider({ children }) {
             photoURL: uRl
         })
     }
-
     const updateProfileDetails = async (displayName, email) => {
         updateProfile(currentUser, {
             displayName: displayName
@@ -115,7 +115,7 @@ export function AuthProvider({ children }) {
 
     const addToCart = async (productID, img, title, price) => {
         // await DB.collection("cart" + currentUser.uid).doc(productId).set(newdata)
-        const cartRef = doc(db, "cart: " + currentUser.uid, productID);
+        const cartRef = doc(db, "cart", currentUser.uid, currentUser.uid, productID);
         await setDoc(cartRef, {
             productID: productID,
             img_url: img,
@@ -124,6 +124,19 @@ export function AuthProvider({ children }) {
         });
 
     };
+    const unique_id = uuid();
+    const placeOrder = async (product, email, full_name, phone_number, price, items) => {
+        const cartRef = doc(db, "order: " + currentUser.uid, unique_id);
+        await setDoc(cartRef, {
+            product: product,
+            email: email,
+            full_name: full_name,
+            phone_number: phone_number,
+            total: parseInt(price),
+            items: parseInt(items),
+        });
+    };
+
     const value = {
         currentUser,
         logInWithEmailAndPassword,
@@ -133,7 +146,8 @@ export function AuthProvider({ children }) {
         updatePhoto,
         logout,
         sendPasswordReset,
-        addToCart
+        addToCart,
+        placeOrder,
     };
 
     return (
