@@ -5,12 +5,13 @@ import { db } from '../Authentication/firebaseConfig';
 import { useAuth } from '../Context/AuthContext';
 import Loading from '../components/Loading/Loading';
 import CartBottom from './CartBottom';
+import { useNavigate } from 'react-router-dom';
 
 export default function CartHome({ showCart }) {
     const { currentUser } = useAuth();
     const [ID, setID] = useState([])
     const [fetch, setFetch] = useState([]);
-    const [sum, setSum]= useState(0);
+    const navigate = useNavigate();
     const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
     const calcPrice = (item) => {
@@ -48,15 +49,15 @@ export default function CartHome({ showCart }) {
             DeleteCart();
         }
         FetchData();
-        // DeleteCart();
     }, [ID])
 
-    const handleSubmit = async e => {
-        e.preventDefault();
-        const productID = e.target.productId.value;
-        const img = e.target.imgName.value;
-        const title = e.target.titleName.value;
-        const price = e.target.priceName.value;
+    const toCheckout = async () => {
+        if(fetch.length > 0){
+            navigate("/checkout");
+        }
+        else {
+            setMessage("Cart is Empty");
+        }
     }
     return (
         <>
@@ -72,7 +73,7 @@ export default function CartHome({ showCart }) {
                                 </path> </g>
                         </svg>
                     </div>
-                    <form onSubmit={handleSubmit}>
+                    {/* <form onSubmit={handleSubmit}> */}
                         <section className=" my-4">
                             <p className='text-gray-900 text-lg'>{message}</p>
 
@@ -98,8 +99,8 @@ export default function CartHome({ showCart }) {
                                 )))}                            
                         </section>
                         
-                        <CartBottom price={calcPrice(fetch)} />
-                    </form>
+                        <CartBottom price={calcPrice(fetch)} toCheckout={toCheckout} />
+                    {/* </form> */}
 
                 </div>
             </section>
