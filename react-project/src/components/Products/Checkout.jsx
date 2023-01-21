@@ -2,7 +2,7 @@ import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
 import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { db } from '../../Authentication/firebaseConfig';
 import { useAuth } from '../../Context/AuthContext'
 import Loading from '../Loading/Loading';
@@ -10,7 +10,7 @@ import Navbar from '../Navigation/Navbar/Navbar'
 import CheckoutSummary from './CheckoutSummary';
 import CheckoutUserInfo from './CheckoutUserInfo';
 export default function Checkout() {
-    const { currentUser, placeOrder, deleteFromCart } = useAuth();
+    const { currentUser, placeOrder } = useAuth();
     const [loading, setLoading] = useState(false);
     const [fetch, setFetch] = useState([]);
     const [items, setItems] = useState([]);
@@ -56,6 +56,7 @@ export default function Checkout() {
         });
 
     }
+    if(fetch.length>0){
     return (
         <>
             <Navbar />
@@ -76,6 +77,18 @@ export default function Checkout() {
             </section>
         </>
     )
+                    }
+                    else{
+                        return (
+                            <>
+                            <Navbar />
+                            <div className='px-4 py-4 shadow-lg mx-4 my-4'>
+                                <p className='py-4'>Cart is Empty</p>
+                                <Link to="/products"><button className='btn-primary'>Go Back </button> </Link>
+                                </div>
+                            </>
+                        )
+                    }
 
 }
 

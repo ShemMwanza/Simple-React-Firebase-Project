@@ -10,6 +10,8 @@ import PrivateRoute from './utils/PrivateRouter';
 import Products from './components/Products/Products';
 import ProductView from './components/Products/ProductView';
 import Checkout from './components/Products/Checkout';
+import PaymentMethod from './Payment/PaymentMethod';
+import SuccessOrder from './components/Success/SuccessOrder';
 function App() {
   return (
     <>
@@ -24,8 +26,10 @@ function App() {
             <Route path="/forgotpassword" element={<ForgotPassword />} />
             <Route path="/*" element={<Error />} />
             <Route path="/checkout" element={<Checkout />} />
-            <Route path="/products" element={<Products />} />       
+            <Route path="/products" element={<Products />} />
             <Route path="/product/:id" element={<ProductView />} />
+            <Route path="/paymentmethod" element={<PaymentMethod />} />
+            <Route path="/ordersuccess" element={<SuccessOrder />} />
             <Route path="/profile" element={<PrivateRoute> <Profile /> </PrivateRoute>} />
             {/* <Route path="/profile" element={<Profile />} /> */}
 
