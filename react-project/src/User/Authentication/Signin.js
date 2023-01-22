@@ -48,7 +48,7 @@ export default function Signin() {
             <EmptyNavbar to='/signup' text='Go to Sign up' />
             <div className="flex rounded-lg justify-center px-2 md:px-6 py-12">
                 <div className="w-full rounded-lg xl:w-3/4 lg:w-11/12 flex">
-                    <div className="hidden lg:flex lg:justify-center w-1/2 rounded-lg bg-green-400 py-10 px-10">
+                    <div className="hidden lg:flex lg:justify-center w-1/2 rounded-lg bg-green-primary py-10 px-10">
                         <img src="/assets/authAsset.svg" alt='link' />
                     </div>
                     <div className="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none">
