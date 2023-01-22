@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}", './public/index.html'
+    "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {
@@ -26,11 +26,10 @@ module.exports = {
       animation: {
         'spin-slow': 'spin 2.5s linear infinite',
       },
-      fontFamily: {
-        poppins: ['Poppins', 'sans-serif'],
-        adelia: ["ADELIA", "cursive"],
-        sans: ['Proxima Nova,"sans-serif']
-      },
+    },
+    fontFamily: {
+      poppins: ['Poppins', 'sans-serif'],
+      adelia: ["ADELIA", "cursive"],
     },
   },
   plugins: [],
