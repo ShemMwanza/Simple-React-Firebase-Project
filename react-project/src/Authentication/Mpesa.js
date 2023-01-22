@@ -4,7 +4,12 @@ const LipaNaMpesa = async (phone_number) => {
     const base64Encoded = btoa(`${REACT_APP_consumerKey}:${REACT_APP_consumerSecret}`);
     const headers = {
         'Authorization': `Basic ${base64Encoded}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Accept',
+        'Access-Control-Allow-Method': '*',
+        'status':200, 
+        
     }
 
     const body = {
@@ -22,8 +27,9 @@ const LipaNaMpesa = async (phone_number) => {
     }
 
     try {
-        const response = await axios.post("https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest", body, { headers });
-        console.log(response);
+        await axios.post("https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest", body, { headers }).then( response => {
+            response.status =200;
+        });
     } catch (error) {
         console.log(error);
         // return error.response.data;
