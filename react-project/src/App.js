@@ -12,6 +12,7 @@ import ProductView from './components/Products/ProductView';
 import Checkout from './components/Products/Checkout';
 import PaymentMethod from './Payment/PaymentMethod';
 import SuccessOrder from './components/Success/SuccessOrder';
+import MpesaMethod from './Payment/MpesaMethod';
 function App() {
   return (
     <>
@@ -29,6 +30,7 @@ function App() {
             <Route path="/products" element={<Products />} />
             <Route path="/product/:id" element={<ProductView />} />
             <Route path="/paymentmethod" element={<PaymentMethod />} />
+            <Route path="/mpesa" element={<MpesaMethod />} />
             <Route path="/ordersuccess" element={<SuccessOrder />} />
             <Route path="/profile" element={<PrivateRoute> <Profile /> </PrivateRoute>} />
             {/* <Route path="/profile" element={<Profile />} /> */}

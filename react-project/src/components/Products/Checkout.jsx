@@ -51,6 +51,7 @@ export default function Checkout() {
         const phone_number = e.target.phoneNumber.value;
         placeOrder(fetch, currentUser.email, currentUser.displayName, phone_number, total, items).then(() => {
             console.log("Success!!");
+            navigate("/paymentmethod");
         }).catch((error) => {
             console.log(error);
         });
