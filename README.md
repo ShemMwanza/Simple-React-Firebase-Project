@@ -51,4 +51,14 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ![image](https://user-images.githubusercontent.com/77288876/214006006-0b3dad3a-44dc-403d-b470-a1c4f1e1caf6.png)
 
+##Products Page
+
+![image](https://user-images.githubusercontent.com/77288876/214018416-c98715de-7f1c-4846-a34e-80184a7d2021.png)
+
+
+##Product View Page
+
+![image](https://user-images.githubusercontent.com/77288876/214018283-f9055821-4eb9-4860-a795-39ab19c5c7c3.png)
+
+
 
