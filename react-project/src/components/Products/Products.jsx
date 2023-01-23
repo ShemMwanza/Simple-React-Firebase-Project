@@ -73,7 +73,7 @@ export default function Products() {
                 <ProductsHeader />
                 {loading ? (<Loading />) : (
                     <section className='w-11/12 mx-auto'>
-                        <div className='flex flex-col py-8 md:inline-grid grid-cols-3 gap-4'>
+                        <div className='flex flex-col py-8 md:inline-grid grid-cols-5 gap-4 '>
                             {currentItems?.map((newdata, i) => (
                                 <form key={i} onSubmit={handleSubmit}>
                                     <div className='hover:opacity-70 transition-all ease-in-out duration-500 delay-100 cursor-pointer'>
