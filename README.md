@@ -23,7 +23,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 # The Project Outlook
 
-##Landing Page
+## Landing Page
 
 ![image](https://user-images.githubusercontent.com/77288876/214003428-1dd75048-f9fd-4227-b6a0-34127820edf9.png)
 
