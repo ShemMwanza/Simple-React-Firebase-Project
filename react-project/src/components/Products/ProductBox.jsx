@@ -15,7 +15,7 @@ export default function ProductBox(props) {
                 <div className="px-2 w-full">
                     <input
                         name={titleName}
-                        className="mt-2 text-lg w-full text-justify font-poppins font-medium text-gray-800" defaultValue={title} />
+                        className="mt-2 text-lg w-full text-justify font-poppins font-medium text-gray-800" disabled defaultValue={title} />
                     <div className='py-2 w-full flex items-center justify-between'>
                         <p className="text-xl md:text-lg lg:text-xl font-medium text-green-primary">KES {price}</p>
                         <input className='hidden' name={priceName} defaultValue={price} />
