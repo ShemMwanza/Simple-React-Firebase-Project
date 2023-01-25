@@ -2,15 +2,15 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { LipaNaMpesa } from '../Authentication/Mpesa'
 import LoadButton from '../components/Buttons/LoadButton'
 import TextInput from '../components/Inputs/TextInput'
 import Navbar from '../components/Navigation/Navbar/Navbar'
+import { LipaNaMpesa } from '../Authentication/Mpesa'
 import { useAuth } from '../Context/AuthContext'
 export default function MpesaMethod() {
     //Loading
     const [isLoading, setIsLoading] = useState(false);
-    const {currentUser} = useAuth();
+    const { currentUser } = useAuth();
     const [errorMsg, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const navigate = useNavigate();
@@ -23,8 +23,10 @@ export default function MpesaMethod() {
         e.preventDefault();
         const phone_number = e.target.phone_number.value;
         console.log(phone_number);
-        LipaNaMpesa(phone_number).then(()=>{
+        LipaNaMpesa(phone_number).then(() => {
             setSuccessMessage("Prompt has been sent");
+        }).catch(() => {
+            setErrorMessage("There was a problem in payment. Try Again");
         });
     }
     return (
