@@ -9,10 +9,11 @@ import { AuthProvider } from './Context/AuthContext';
 import PrivateRoute from './utils/PrivateRouter';
 import Products from './components/Products/Products';
 import ProductView from './components/Products/ProductView';
-import Checkout from './components/Products/Checkout';
 import PaymentMethod from './Payment/PaymentMethod';
 import SuccessOrder from './components/Success/SuccessOrder';
 import MpesaMethod from './Payment/MpesaMethod';
+import Checkout from './components/Checkout/Checkout';
+import Search from './components/Search/Search';
 function App() {
   return (
     <>
@@ -32,6 +33,7 @@ function App() {
             <Route path="/paymentmethod" element={<PaymentMethod />} />
             <Route path="/mpesa" element={<MpesaMethod />} />
             <Route path="/ordersuccess" element={<SuccessOrder />} />
+            <Route path='/search/:id' element={<Search />} />
             <Route path="/profile" element={<PrivateRoute> <Profile /> </PrivateRoute>} />
             {/* <Route path="/profile" element={<Profile />} /> */}
 

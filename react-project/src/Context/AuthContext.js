@@ -24,6 +24,7 @@ import {
 } from "firebase/firestore";
 import { useState } from "react";
 import { v4 as uuid } from 'uuid';
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -137,6 +138,18 @@ export function AuthProvider({ children }) {
         });
     };
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(10);
+    const [items, setItems] = useState([]);
+    const [isSearch, setIsSearch] = useState([false]);
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
+
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+
+    const [prodID, setProdID] = useState([]);
+
     const value = {
         currentUser,
         logInWithEmailAndPassword,
@@ -148,6 +161,19 @@ export function AuthProvider({ children }) {
         sendPasswordReset,
         addToCart,
         placeOrder,
+        paginate,
+        currentPage,
+        setCurrentPage,
+        itemsPerPage,
+        items,
+        setItems,
+        isSearch,
+        setIsSearch,
+        indexOfLastItem,
+        indexOfFirstItem,
+        currentItems,
+        prodID,
+        setProdID,
     };
 
     return (
