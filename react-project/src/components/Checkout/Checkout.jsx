@@ -14,7 +14,7 @@ export default function Checkout() {
     const [loading, setLoading] = useState(false);
     const [fetch, setFetch] = useState([]);
     const [items, setItems] = useState([]);
-    const [total, setTotal] = useState([]);
+    const [total, setTotal] = useState(0);
     const [productID, setProductID] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
@@ -57,39 +57,45 @@ export default function Checkout() {
         });
 
     }
-    if(fetch.length>0){
-    return (
-        <>
-            <Navbar />
-            <section className='container mx-auto'>
-                <div className='w-full py-8'>
-                    {loading ? (<Loading />) : (
-                        <form
-                            onSubmit={handleSubmit}
-                            className='w-full px-4 md:px-0 flex flex-col-reverse md:flex-row justify-between'>
-                            <CheckoutUserInfo />
-                            <CheckoutSummary
-                                items={items}
-                                total={total} />
-                        </form>
-                    )}
+    useEffect(() => {
+        let newTotal = 0;
+        for (const item of fetch) {
+            newTotal += item.price * item.quantity;
+        }
+        setTotal(newTotal);
+    }, [fetch]);
+    if (fetch.length > 0) {
+        return (
+            <>
+                <Navbar />
+                <section className='container mx-auto'>
+                    <div className='w-full py-8'>
+                        {loading ? (<Loading />) : (
+                            <form
+                                onSubmit={handleSubmit}
+                                className='w-full px-4 md:px-0 flex flex-col-reverse md:flex-row justify-between'>
+                                <CheckoutUserInfo />
+                                <CheckoutSummary
+                                    items={items}
+                                    total={total} />
+                            </form>
+                        )}
+                    </div>
+                </section>
+            </>
+        )
+    }
+    else {
+        return (
+            <>
+                <Navbar />
+                <div className='px-4 py-4 shadow-lg mx-4 my-4'>
+                    <p className='py-4'>Cart is Empty</p>
+                    <Link to="/products"><button className='btn-primary'>Go Back </button> </Link>
                 </div>
-
-            </section>
-        </>
-    )
-                    }
-                    else{
-                        return (
-                            <>
-                            <Navbar />
-                            <div className='px-4 py-4 shadow-lg mx-4 my-4'>
-                                <p className='py-4'>Cart is Empty</p>
-                                <Link to="/products"><button className='btn-primary'>Go Back </button> </Link>
-                                </div>
-                            </>
-                        )
-                    }
+            </>
+        )
+    }
 
 }
 

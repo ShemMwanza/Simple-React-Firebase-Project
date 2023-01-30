@@ -14,27 +14,23 @@ export default function CartHome({ showCart }) {
     const navigate = useNavigate();
     const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
-    const calcPrice = (item) => {
-            return item.reduce((accumulator, object) => {
-                return accumulator + object.price;
-            }, 0);
-        };
+    // const calcPrice = (item) => {
+    //         return item.reduce((accumulator, object) => {
+    //             return accumulator + object.price*object.quantity;
+    //         }, 0);
+    //     };
     const FetchData = async () => {
         setLoading(true);
-        
-        getDocs(collection(db, "cart", currentUser.uid, currentUser.uid ))
+
+        getDocs(collection(db, "cart", currentUser.uid, currentUser.uid))
             .then((querySnapshot) => {
                 const newdata = querySnapshot.docs
                     .map((doc) => ({ ...doc.data(), id: doc.id }));
                 setFetch(newdata);
-                // newdata.map(obj => ({ title: obj.title, price: obj.price }))
                 let t = 0;
                 if (newdata.length < 1) {
                     setMessage("There is no item in cart");
                 }
-                console.log(calcPrice(newdata));
-                console.log("fetchwi: " + newdata.length)
-                // console.log(fetch);
                 setLoading(false);
             });
     }
@@ -50,9 +46,8 @@ export default function CartHome({ showCart }) {
         }
         FetchData();
     }, [ID])
-
     const toCheckout = async () => {
-        if(fetch.length > 0){
+        if (fetch.length > 0) {
             navigate("/checkout");
         }
         else {
@@ -73,35 +68,31 @@ export default function CartHome({ showCart }) {
                                 </path> </g>
                         </svg>
                     </div>
-                    {/* <form onSubmit={handleSubmit}> */}
-                        <section className=" my-4">
-                            <p className='text-gray-900 text-lg'>{message}</p>
+                    <section className=" my-4">
+                        <p className='text-gray-900 text-lg'>{message}</p>
 
-                            {loading ? (<Loading />) : (
-                                fetch?.map((newdata, i) => (
+                        {loading ? (<Loading />) : (
+                            fetch?.map((newdata, i) => (
 
-                                    <div key={i} className="h-1/2 overflow-y-scroll">
-                                        {/* {() => setID(newdata.productID)} */}
-                                        <CartProduct
-                                            img_url={newdata.img_url}
-                                            imgName="imgName"
-                                            titleName="titleName"
-                                            priceName="priceName"
-                                            title={newdata.title}
-                                            price={newdata.price}
-                                            quantity="quantity"
-                                            deleteCart={() => { setID(newdata.productID) }}
-                                            id={newdata.productID}
-                                            idName="productId" />
-                                            
-                                    </div>
-                                    
-                                )))}                            
-                        </section>
-                        
-                        <CartBottom price={calcPrice(fetch)} toCheckout={toCheckout} />
-                    {/* </form> */}
+                                <div key={i} className="h-1/2 overflow-y-scroll">
+                                    {/* {() => setID(newdata.productID)} */}
+                                    <CartProduct
+                                        img_url={newdata.img_url}
+                                        imgName="imgName"
+                                        titleName="titleName"
+                                        priceName="priceName"
+                                        title={newdata.title}
+                                        price={newdata.price}
+                                        quantity="quantity"
+                                        deleteCart={() => { setID(newdata.productID) }}
+                                        id={newdata.productID}
+                                        idName="productId" />
 
+                                </div>
+
+                            )))}
+                    </section>
+                    <CartBottom toCheckout={toCheckout} />
                 </div>
             </section>
         </>

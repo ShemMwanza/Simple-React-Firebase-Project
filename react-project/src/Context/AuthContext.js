@@ -21,6 +21,7 @@ import {
     doc,
     setDoc,
     deleteDoc,
+    updateDoc,
 } from "firebase/firestore";
 import { useState } from "react";
 import { v4 as uuid } from 'uuid';
@@ -121,9 +122,16 @@ export function AuthProvider({ children }) {
             productID: productID,
             img_url: img,
             title: title,
-            price: parseInt(price) 
+            price: parseInt(price),
+            quantity: 1
         });
 
+    };
+    const addQuantityToCart = async (productID, quantity) => {
+        const cartRef = doc(db, "cart", currentUser.uid, currentUser.uid,productID);
+        await updateDoc(cartRef, {
+            quantity: parseInt(quantity)
+        });
     };
     const unique_id = uuid();
     const placeOrder = async (product, email, full_name, phone_number, price, items) => {
@@ -174,6 +182,7 @@ export function AuthProvider({ children }) {
         currentItems,
         prodID,
         setProdID,
+        addQuantityToCart
     };
 
     return (

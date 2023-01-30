@@ -1,33 +1,31 @@
 import React, { useState } from 'react'
 import * as FaIcons from "react-icons/fa"
+import { useAuth } from '../Context/AuthContext';
 export default function CartProduct(props) {
+    const { addQuantityToCart } = useAuth();
     const [qnt, setQnt] = useState(1);
-    const [disable, setDisable] = useState([]);
+    const [disable, setDisable] = useState(false);
+
     const handleChange = (event) => {
         setQnt(event.target.number.value);
     };
-
+    const {
+        title, price, img_url, quantity,
+        imgName, priceName, titleName, idName, id
+    } = props;
     const handleAddClick = () => {
-        setQnt(qnt + 1)
-    };
+        setQnt(qnt + 1);
+        // console.log(qnt)
+        addQuantityToCart(id, qnt+1).then(() => {
+            // alert("successful");
+        }).catch((error) => { alert("A problem has occurred with the application!!") });
+    }
     const handleSubClick = () => {
-        if (qnt === 0) {
-            setDisable(false);
-        }
-        else {
-            setDisable(true)
-            setQnt(qnt - 1);
-        }
-    };
-    const title = props.title;
-    const price = props.price;
-    const img_url = props.img_url;
-    const quantity = props.quantity;
-    const imgName = props.imgName;
-    const priceName = props.priceName;
-    const titleName = props.titleName;
-    const idName = props.idName;
-    const id = props.id;
+        setQnt(Math.max(0, qnt - 1));
+        addQuantityToCart(id, qnt - 1).then(() => {
+            // alert("successful");
+        }).catch((error) => { alert("A problem has occurred with the application!!") });
+    }
     return (
         <>
 
@@ -39,15 +37,15 @@ export default function CartProduct(props) {
                     <h1 className='text-gray-800 text-sm sm:text-base font-poppins mb-4'>{title}</h1>
 
                     <div className="flex flex-row h-auto w-full rounded-lg relative bg-transparent mt-1">
-                        <button onClick={handleSubClick} className="bg-gray-200 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
+                        <button type='button' onClick={handleSubClick} className="bg-gray-200 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
                             <span className="m-auto text-2xl font-thin">−</span>
                         </button>
                         <input
                             onChange={handleChange}
                             type="number" className="text-center focus:outline-none w-full bg-gray-200 font-semibold text-md hover:text-black focus:text-black flex items-center text-gray-700 outline-none"
-                            name={quantity}
+                            name="quantity"
                             value={qnt} />
-                        <button onClick={handleAddClick} className="bg-gray-200 text-gray-600 hover:text-gray-700 hover:bg-gray-300 h-full w-20 rounded-r cursor-pointer">
+                        <button type='button' onClick={handleAddClick} className="bg-gray-200 text-gray-600 hover:text-gray-700 hover:bg-gray-300 h-full w-20 rounded-r cursor-pointer">
                             <span className="m-auto text-2xl font-thin">+</span>
                         </button>
                         <input className='hidden' name={priceName} defaultValue={price} />
@@ -57,11 +55,14 @@ export default function CartProduct(props) {
                     </div>
                 </div>
                 <div className='w-1/4 flex flex-col justify-between'>
-                    <p className="text-green-primary text-sm sm:text-base">KES {price}</p>
+                    <p className="text-green-primary text-sm sm:text-base">KES {price * qnt}</p>
                     <div className='w-full flex h-auto'>
-                        <button onClick={props.deleteCart} className='w-full items-center flex justify-center border rounded py-2 cursor-pointer'><FaIcons.FaTrashAlt className='text-red-600 '/></button>
+                        <button onClick={props.deleteCart} className='w-full items-center flex justify-center border rounded py-2 cursor-pointer'><FaIcons.FaTrashAlt className='text-red-600 ' /></button>
                     </div>
                 </div>
+            </div>
+            <div>
+                <p></p>
             </div>
         </>
     )
